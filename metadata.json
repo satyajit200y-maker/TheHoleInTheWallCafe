@@ -1,0 +1,7 @@
+{
+  "name": "The Hole In The Wall Cafe",
+  "description": "Legendary all-day breakfast diner and cosy café in Koramangala, Bengaluru serving waffles, pancakes, burgers, sandwiches and artisan coffees.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
