@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { 
   MapPin, 
   Phone, 
@@ -22,15 +23,25 @@ export const VisitUsSection: React.FC = () => {
   const whatsappUrl = `https://wa.me/${CAFE_DATA.whatsappRaw}?text=${encodeURIComponent(CAFE_DATA.whatsappMessage)}`;
 
   return (
-    <section
+    <motion.section
       id="visit-us"
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#F5EFE3] relative scroll-mt-16"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6 }}
+      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#F5EFE3] relative scroll-mt-16 overflow-hidden"
       aria-label="Visit us, opening hours and map directions"
     >
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        {/* Section Header with Scroll Transition */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B65F3B]/10 text-[#B65F3B] text-xs font-semibold uppercase tracking-wider mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>Find Our Café</span>
@@ -41,15 +52,21 @@ export const VisitUsSection: React.FC = () => {
           <p className="mt-3 text-base sm:text-lg text-[#5A4030]">
             Nestled in the cozy heart of 4th Block, Koramangala. A warm table and hot waffles are waiting.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column: Cafe Address, Hours & Contact Actions */}
-          <div className="lg:col-span-6 space-y-6">
+          {/* Left Column: Cafe Address, Hours & Contact Actions with Scroll Animation */}
+          <motion.div 
+            initial={{ opacity: 0, y: 35, x: -15 }}
+            whileInView={{ opacity: 1, y: 0, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 space-y-6"
+          >
             
             {/* Address & Direct Actions Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#FFF9EF] border border-[#2A211B]/10 shadow-sm space-y-6">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#FFF9EF] border border-[#2A211B]/10 shadow-sm space-y-6 transition-all duration-300 hover:shadow-md">
               <div>
                 <span className="text-xs font-bold text-[#B65F3B] uppercase tracking-wider block mb-1">
                   Koramangala Flagship Outlet
@@ -105,7 +122,7 @@ export const VisitUsSection: React.FC = () => {
                   className="flex items-center justify-center gap-2 bg-[#F5EFE3] hover:bg-[#EBE3D3] text-[#2A211B] py-3 px-4 rounded-xl font-semibold text-sm border border-[#2A211B]/15 transition-colors"
                 >
                   <Phone className="w-4 h-4 text-[#B65F3B]" />
-                  <span>{CAFE_DATA.phone}</span>
+                  <span>Call Now</span>
                 </a>
 
                 {/* WhatsApp Chat */}
@@ -124,7 +141,7 @@ export const VisitUsSection: React.FC = () => {
             </div>
 
             {/* Opening Hours Schedule */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-[#FFF9EF] border border-[#2A211B]/10 shadow-sm">
+            <div className="p-6 sm:p-7 rounded-3xl bg-[#FFF9EF] border border-[#2A211B]/10 shadow-sm transition-all duration-300 hover:shadow-md">
               <div className="flex items-center justify-between pb-4 border-b border-[#2A211B]/10 mb-4">
                 <div className="flex items-center gap-2.5">
                   <Clock className="w-5 h-5 text-[#B65F3B]" />
@@ -174,29 +191,35 @@ export const VisitUsSection: React.FC = () => {
 
             {/* Helpful Visitor Amenities / Tips */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-2xl bg-[#FFF9EF] border border-[#2A211B]/10 text-center">
+              <div className="p-3.5 rounded-2xl bg-[#FFF9EF] border border-[#2A211B]/10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-sm">
                 <Car className="w-5 h-5 text-[#6E765B] mx-auto mb-1" />
                 <h5 className="font-bold text-xs text-[#2A211B]">Parking</h5>
                 <p className="text-[11px] text-[#8B8176] mt-0.5">Street parking available near 4th Block Park</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-[#FFF9EF] border border-[#2A211B]/10 text-center">
+              <div className="p-3.5 rounded-2xl bg-[#FFF9EF] border border-[#2A211B]/10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-sm">
                 <PawPrint className="w-5 h-5 text-[#B65F3B] mx-auto mb-1" />
                 <h5 className="font-bold text-xs text-[#2A211B]">Pet Friendly</h5>
                 <p className="text-[11px] text-[#8B8176] mt-0.5">Outdoor patio welcomes your furry pals</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-[#FFF9EF] border border-[#2A211B]/10 text-center">
+              <div className="p-3.5 rounded-2xl bg-[#FFF9EF] border border-[#2A211B]/10 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-sm">
                 <Users className="w-5 h-5 text-[#5A4030] mx-auto mb-1" />
                 <h5 className="font-bold text-xs text-[#2A211B]">Weekend Tip</h5>
                 <p className="text-[11px] text-[#8B8176] mt-0.5">Arrive before 9:30 AM for zero wait-times</p>
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
-          {/* Right Column: Visual Map Preview & Directions Interface */}
-          <div className="lg:col-span-6 space-y-4">
+          {/* Right Column: Visual Map Preview & Directions Interface with Scroll Animation */}
+          <motion.div 
+            initial={{ opacity: 0, y: 35, x: 15 }}
+            whileInView={{ opacity: 1, y: 0, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.75, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 space-y-4"
+          >
             
             <div className="rounded-3xl overflow-hidden border border-[#2A211B]/15 shadow-lg bg-[#FFF9EF] relative">
               
@@ -307,11 +330,11 @@ export const VisitUsSection: React.FC = () => {
 
             </div>
 
-          </div>
+          </motion.div>
 
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 };

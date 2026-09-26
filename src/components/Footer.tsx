@@ -1,8 +1,8 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { 
   Coffee, 
   MapPin, 
-  Phone, 
   MessageCircle, 
   Instagram, 
   Facebook, 
@@ -29,19 +29,38 @@ export const Footer: React.FC<FooterProps> = ({
 
   const whatsappUrl = `https://wa.me/${CAFE_DATA.whatsappRaw}?text=${encodeURIComponent(CAFE_DATA.whatsappMessage)}`;
 
+  const columnVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] }
+    }
+  };
+
   return (
-    <footer
+    <motion.footer
       id="main-footer"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="bg-[#2A211B] text-[#F5EFE3] pt-16 pb-28 lg:pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       aria-label="Footer navigation and cafe information"
     >
       <div className="max-w-7xl mx-auto">
         
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-white/10">
+        {/* Main Footer Grid with Staggered Scroll Animation */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ staggerChildren: 0.12 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-white/10"
+        >
           
           {/* Brand Intro Column */}
-          <div className="lg:col-span-4 space-y-4">
+          <motion.div variants={columnVariants} className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#B65F3B] text-white flex items-center justify-center">
                 <Coffee className="w-5 h-5" />
@@ -84,10 +103,10 @@ export const Footer: React.FC<FooterProps> = ({
                 <MessageCircle className="w-4 h-4" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links Column */}
-          <div className="lg:col-span-2 space-y-3">
+          <motion.div variants={columnVariants} className="lg:col-span-2 space-y-3">
             <h4 className="font-display font-bold text-sm tracking-wider uppercase text-amber-200">
               Quick Links
             </h4>
@@ -114,10 +133,10 @@ export const Footer: React.FC<FooterProps> = ({
                 <a href="#visit-us" className="hover:text-white transition-colors">Visit Us</a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Details Column */}
-          <div className="lg:col-span-3 space-y-3">
+          <motion.div variants={columnVariants} className="lg:col-span-3 space-y-3">
             <h4 className="font-display font-bold text-sm tracking-wider uppercase text-amber-200">
               Contact &amp; Hours
             </h4>
@@ -127,12 +146,6 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>
                   3, 8th Main Rd, 4th Block, Koramangala, Bengaluru 560047
                 </span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#B65F3B] shrink-0" />
-                <a href={`tel:${CAFE_DATA.phoneRaw}`} className="hover:text-white transition-colors">
-                  {CAFE_DATA.phone}
-                </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-[#B65F3B] shrink-0" />
@@ -150,10 +163,10 @@ export const Footer: React.FC<FooterProps> = ({
                 </a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Legal & Privacy Column */}
-          <div className="lg:col-span-3 space-y-3">
+          <motion.div variants={columnVariants} className="lg:col-span-3 space-y-3">
             <h4 className="font-display font-bold text-sm tracking-wider uppercase text-amber-200">
               Legal &amp; Guidelines
             </h4>
@@ -191,12 +204,18 @@ export const Footer: React.FC<FooterProps> = ({
                 </button>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
-        {/* Bottom Bar with Back to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F5EFE3]/60">
+        {/* Bottom Bar with Back to Top and Motion Reveal */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F5EFE3]/60"
+        >
           <p>© 2026 The Hole In The Wall Cafe. All rights reserved.</p>
 
           <div className="flex items-center gap-4">
@@ -206,15 +225,15 @@ export const Footer: React.FC<FooterProps> = ({
 
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors flex items-center gap-1 hover:scale-110 active:scale-95"
               aria-label="Back to top"
             >
               <ArrowUp className="w-4 h-4" />
             </button>
           </div>
-        </div>
+        </motion.div>
 
       </div>
-    </footer>
+    </motion.footer>
   );
 };
